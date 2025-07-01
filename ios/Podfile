@@ -22,29 +22,154 @@ source 'https://github.com/slateteams/ios-integration-getty'
 source 'https://github.com/slateteams/ios-effects'
 source 'https://cdn.cocoapods.org/'
 
-use_modular_headers!
+# Use modular headers for React Native pods only
+# use_modular_headers!
 
-# Slate requires iOS 16.0+, but you can keep React Native's minimum if higher
-platform :ios, '16.0'  # Updated for Slate compatibility
+platform :ios, '16.0'
 prepare_react_native_project!
 
-linkage = ENV['USE_FRAMEWORKS']
-if linkage != nil
-  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
-  use_frameworks! :linkage => linkage.to_sym
+use_frameworks! :linkage => :static
+
+# AWS SDK pods that need special handling
+$aws_sdk_pods = [
+  'AWSCore',
+  'AWSAuthCore',
+  'AWSMobileClient',
+  'AWSCognitoIdentityProvider',
+  'AWSCognitoIdentityProviderASF'
+]
+
+$dynamic_frameworks = [
+  'Slate',
+  'FMSharing',
+  'NFLSharing',
+  'SlateSlackIntegration',
+  'SlatePhotoshelterIntegration',
+  'SlateGettyIntegration',
+  'FMLib',
+  'CocoaLumberjack',
+  'ReachabilitySwift',
+  'DatadogSDK',
+  'FMRendering',
+  'FBSDKCoreKit',
+  'FBSDKCoreKit_Basics',
+  'FBAEMKit',
+  'FBSDKShareKit',
+  'NFLFootballApi',
+  'Alamofire',
+  'NFLIDApi',
+  'CryptoSwift',
+  'SwiftyXML',
+  'MBProgressHUD',
+  'Firebase',
+  'FirebaseAuth',
+  'FirebaseCore',
+  'GoogleUtilities',
+  'PromisesObjC',
+  'FirebaseCoreDiagnostics',
+  'GoogleDataTransport',
+  'nanopb',
+  'GTMSessionFetcher',
+  'FirebaseAnalytics',
+  'FirebaseInstallations',
+  'GoogleAppMeasurement',
+  'FirebaseCrashlytics',
+  'FirebasePerformance',
+  'FirebaseRemoteConfig',
+  'FirebaseABTesting',
+  'FirebaseStorage',
+  'SDWebImage',
+  'Presentr',
+  'SlateServerData',
+  'ZIPFoundation',
+  'MagicalRecord',
+  'SlateMobileApi',
+  'FMTextView',
+  'MenuItemKit',
+  'SlateAppData',
+  'SlateEffects',
+  'SAMKeychain',
+  'EasyTipView',
+  'Gifu',
+  'PagingKit',
+  'Analytics',
+  'WonderPush',
+  'CustomerIOTracking',
+  'CustomerIOCommon',
+  'CustomerIOMessagingPushAPN',
+  'CustomerIOMessagingPush',
+  'CustomerIOMessagingInApp',
+  'AWSMobileClient',
+  'AWSAuthCore',
+  'AWSCore',
+  'AWSCognitoIdentityProvider',
+  'AWSCognitoIdentityProviderASF',
+  '1PasswordExtension',
+  'JWTDecode',
+  'LaunchDarkly',
+  'LDSwiftEventSource',
+  'DataCompression',
+]
+
+pre_install do |installer|
+  installer.pod_targets.each do |pod|
+    if $dynamic_frameworks.include?(pod.name)
+      puts "Overriding the build_type to dynamic for #{pod.name}"
+      def pod.build_type
+        Pod::BuildType.new(:linkage => :dynamic, :packaging => :framework)
+      end
+    end
+    
+    # Disable modular headers for AWS SDK pods to prevent header conflicts
+    if $aws_sdk_pods.include?(pod.name)
+      def pod.build_as_static_framework?
+        true
+      end
+      def pod.should_build?
+        true
+      end
+    end
+  end
 end
 
 target 'slateReactNative' do
   config = use_native_modules!
+  
+  # Enable modular headers specifically for React Native pods
+  modular_headers_for = [
+    'React',
+    'React-Core',
+    'ReactCommon',
+    'RCT-Folly',
+    'glog',
+    'Yoga',
+    'DoubleConversion'
+  ]
 
   use_react_native!(
     :path => config[:reactNativePath],
-    # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # SLATE DEPENDENCY - Linked to local iOS app repository
+  # Local repository path: /Users/vimmy/work/ios-app
+  # This references the Slate.podspec which exports:
+  # - Core: Core editing functionality
+  # - Workspace: Video editing workspace
+  # - ThirdParty: Bundled third-party components
+  # - Auth: Authentication & User Management
+  # - ShareExtension: Optional share extension
+
   # SLATE DEPENDENCY - From build/podspec branch
-  pod 'Slate', :git => 'https://github.com/slateteams/ios-app.git', :branch => 'build/podspec'
+  # pod 'Slate', :git => 'https://github.com/slateteams/ios-app.git', :branch => 'build/podspec', :modular_headers => false
+  pod 'Slate', :path => '/Users/vimmy/work/ios-app', :modular_headers => false # CHANGE TO GITHUB LINK WHEN DONE
+  
+  # AWS SDK pods without modular headers to prevent conflicts
+  $aws_sdk_pods.each do |aws_pod|
+    if $dynamic_frameworks.include?(aws_pod)
+      pod aws_pod, :modular_headers => false
+    end
+  end
   
   # Alternative: Include only specific Slate components if you don't need everything
   # pod 'Slate/Core', :git => 'https://github.com/slateteams/ios-app.git', :branch => 'build/podspec'
@@ -62,8 +187,34 @@ target 'slateReactNative' do
     # SLATE BUILD SETTINGS - Required for Slate compatibility
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
+        config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
         # Ensure iOS 16.0+ deployment target for all pods
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
+        
+        # Fix header search paths for AWS SDK pods
+        if $aws_sdk_pods.include?(target.name)
+          # Remove React Native header paths from AWS SDK pods
+          if config.build_settings['HEADER_SEARCH_PATHS']
+            config.build_settings['HEADER_SEARCH_PATHS'] = config.build_settings['HEADER_SEARCH_PATHS']
+              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Public\/React-Core"/, '')
+              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Public\/ReactCommon"/, '')
+              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Public\/RCT-Folly"/, '')
+              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Private\/React-Core"/, '')
+              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Private\/ReactCommon"/, '')
+              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Private\/RCT-Folly"/, '')
+          end
+          
+          # Use non-modular includes for AWS SDK
+          config.build_settings['CLANG_ENABLE_MODULES'] = 'NO'
+          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
+          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'AWS_SDK_PLATFORM_IOS=1'
+        end
+        
+        # Enable modular headers for React Native pods
+        if modular_headers_for.include?(target.name)
+          config.build_settings['CLANG_ENABLE_MODULES'] = 'YES'
+          config.build_settings['DEFINES_MODULE'] = 'YES'
+        end
         
         # Slate-specific build settings
         if target.name.start_with?('Slate')

@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- Ensure you are using 'bundle exec pod install' inside the ios folder, NOT 'pod install'
