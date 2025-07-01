@@ -30,6 +30,9 @@ prepare_react_native_project!
 
 use_frameworks! :linkage => :static
 
+# DISABLE NEW ARCHITECTURE TEMPORARILY FOR SLATE COMPATIBILITY
+ENV['RCT_NEW_ARCH_ENABLED'] = '0'
+  
 # AWS SDK pods that need special handling
 $aws_sdk_pods = [
   'AWSCore',
@@ -135,6 +138,9 @@ end
 target 'slateReactNative' do
   config = use_native_modules!
   
+  # DISABLE NEW ARCHITECTURE FOR COMPATIBILITY
+  ENV['RCT_NEW_ARCH_ENABLED'] = '0'
+  
   # Enable modular headers specifically for React Native pods
   modular_headers_for = [
     'React',
@@ -148,7 +154,10 @@ target 'slateReactNative' do
 
   use_react_native!(
     :path => config[:reactNativePath],
-    :app_path => "#{Pod::Config.instance.installation_root}/.."
+    :app_path => "#{Pod::Config.instance.installation_root}/..",
+    # DISABLE NEW ARCHITECTURE
+    :fabric_enabled => false,
+    :hermes_enabled => true
   )
 
   # SLATE DEPENDENCY - Linked to local iOS app repository
@@ -162,14 +171,16 @@ target 'slateReactNative' do
 
   # SLATE DEPENDENCY - From build/podspec branch
   # pod 'Slate', :git => 'https://github.com/slateteams/ios-app.git', :branch => 'build/podspec', :modular_headers => false
-  pod 'Slate', :path => '/Users/vimmy/work/ios-app', :modular_headers => false # CHANGE TO GITHUB LINK WHEN DONE
+  # Temporarily commented out for testing basic React Native setup
+  # pod 'Slate', :path => '../original-ios-app', :modular_headers => false # LOCAL PATH TO IOS APP
   
   # AWS SDK pods without modular headers to prevent conflicts
-  $aws_sdk_pods.each do |aws_pod|
-    if $dynamic_frameworks.include?(aws_pod)
-      pod aws_pod, :modular_headers => false
-    end
-  end
+  # Temporarily commented out for basic testing
+  # $aws_sdk_pods.each do |aws_pod|
+  #   if $dynamic_frameworks.include?(aws_pod)
+  #     pod aws_pod, :modular_headers => false
+  #   end
+  # end
   
   # Alternative: Include only specific Slate components if you don't need everything
   # pod 'Slate/Core', :git => 'https://github.com/slateteams/ios-app.git', :branch => 'build/podspec'
@@ -180,8 +191,7 @@ target 'slateReactNative' do
     react_native_post_install(
       installer,
       config[:reactNativePath],
-      :mac_catalyst_enabled => false,
-      # :ccache_enabled => true
+      :mac_catalyst_enabled => false
     )
     
     # SLATE BUILD SETTINGS - Required for Slate compatibility
@@ -191,23 +201,32 @@ target 'slateReactNative' do
         # Ensure iOS 16.0+ deployment target for all pods
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
         
+        # DISABLE NEW ARCHITECTURE COMPLETELY
+        config.build_settings['RCT_NEW_ARCH_ENABLED'] = '0'
+        config.build_settings['REACT_NATIVE_UNSTABLE_USE_RUNTIME_SCHEDULER_ALWAYS'] = '0'
+        
         # Fix header search paths for AWS SDK pods
         if $aws_sdk_pods.include?(target.name)
-          # Remove React Native header paths from AWS SDK pods
-          if config.build_settings['HEADER_SEARCH_PATHS']
-            config.build_settings['HEADER_SEARCH_PATHS'] = config.build_settings['HEADER_SEARCH_PATHS']
-              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Public\/React-Core"/, '')
-              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Public\/ReactCommon"/, '')
-              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Public\/RCT-Folly"/, '')
-              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Private\/React-Core"/, '')
-              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Private\/ReactCommon"/, '')
-              .gsub(/"\$\(PODS_ROOT\)\/Headers\/Private\/RCT-Folly"/, '')
-          end
+          # Remove ALL React Native and RCT-Folly headers from AWS SDK compilation
+          config.build_settings['HEADER_SEARCH_PATHS'] = config.build_settings['HEADER_SEARCH_PATHS'].to_s
+            .split.reject { |path| 
+              path.include?('React-Core') || 
+              path.include?('ReactCommon') || 
+              path.include?('RCT-Folly') ||
+              path.include?('React-') ||
+              path.include?('ReactCodegen') ||
+              path.include?('ReactAppDependencyProvider')
+            }.join(' ')
           
           # Use non-modular includes for AWS SDK
           config.build_settings['CLANG_ENABLE_MODULES'] = 'NO'
+          config.build_settings['DEFINES_MODULE'] = 'NO'
           config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
           config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'AWS_SDK_PLATFORM_IOS=1'
+          
+          # Completely isolate AWS SDK from React Native headers
+          config.build_settings['USE_HEADERMAP'] = 'NO'
+          config.build_settings['ALWAYS_SEARCH_USER_PATHS'] = 'NO'
         end
         
         # Enable modular headers for React Native pods
@@ -223,11 +242,20 @@ target 'slateReactNative' do
           config.build_settings['DEVELOPMENT_TEAM'] = 'M6BYW2V9T3'  # Slate's team ID
           config.build_settings['CODE_SIGN_STYLE'] = 'Manual'
           
+          # Disable problematic warnings for Slate
+          config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES'
+          config.build_settings['CLANG_WARN_DOCUMENTATION_COMMENTS'] = 'NO'
+          
           # Release configurations for Slate
           if ['Release', 'Beta', 'PreRelease'].include?(config.name)
             config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
           end
         end
+        
+        # Additional fixes for build conflicts
+        config.build_settings['SWIFT_SUPPRESS_WARNINGS'] = 'YES'
+        config.build_settings['GCC_WARN_64_TO_32_BIT_CONVERSION'] = 'NO'
+        config.build_settings['CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER'] = 'NO'
       end
     end
   end

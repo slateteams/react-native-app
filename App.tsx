@@ -1,11 +1,9 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
+ * Slate React Native App - iOS Workspace Integration
+ * Integrates with the native iOS Slate editing capabilities
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -16,29 +14,16 @@ import {
   StatusBar,
   SafeAreaView,
   Dimensions,
+  Alert,
+  ActivityIndicator,
 } from 'react-native';
+
+// Import our bridge to iOS Slate functionality
+import { SlateWorkspaceManager, Draft, type WorkspaceResult } from './src/bridges/SlateWorkspaceBridge';
 
 const { width } = Dimensions.get('window');
 
-// Mock data for recent projects
-const recentProjects = [
-  {
-    id: 1,
-    title: 'New 02-06-2025',
-    duration: '9:16',
-    lastEdited: 'Last edited 1w ago',
-    thumbnail: 'https://via.placeholder.com/150x200/4A5568/FFFFFF?text=Video+1',
-  },
-  {
-    id: 2,
-    title: 'New 02-06-2025',
-    duration: '0:32',
-    lastEdited: 'Last edited 1w ago', 
-    thumbnail: 'https://via.placeholder.com/150x200/2D3748/FFFFFF?text=Video+2',
-  },
-];
-
-// Mock data for recent media
+// Mock data for recent media (to be replaced with real data later)
 const recentMedia = [
   {
     id: 1,
@@ -46,144 +31,195 @@ const recentMedia = [
   },
   {
     id: 2,
-    thumbnail: 'https://via.placeholder.com/120x120/3182CE/FFFFFF?text=Media+2',
+    thumbnail: 'https://via.placeholder.com/120x120/96CEB4/FFFFFF?text=Media+2',
   },
   {
     id: 3,
-    thumbnail: 'https://via.placeholder.com/120x120/38A169/FFFFFF?text=Media+3',
+    thumbnail: 'https://via.placeholder.com/120x120/FECA57/FFFFFF?text=Media+3',
+  },
+  {
+    id: 4,
+    thumbnail: 'https://via.placeholder.com/120x120/6C5CE7/FFFFFF?text=Media+4',
   },
 ];
 
-const quickStartOptions = [
-  { id: 1, title: 'Template', icon: '📋' },
-  { id: 2, title: 'Denoise', icon: '🔊' },
-  { id: 3, title: 'Layout', icon: '📱' },
-  { id: 4, title: 'Extract Audio', icon: '🎵' },
-  { id: 5, title: 'Remove BG', icon: '🖼️' },
-  { id: 6, title: 'Add caption', icon: '💬' },
-];
+const App: React.FC = () => {
+  const [drafts, setDrafts] = useState<Draft[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [bridgeConnected, setBridgeConnected] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState('Testing...');
 
-const Header = () => (
-  <View style={styles.header}>
-    <Text style={styles.headerTitle}>Create</Text>
-    <View style={styles.headerIcons}>
-      <TouchableOpacity style={styles.headerIcon}>
-        <Text style={styles.headerIconText}>🔔</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.headerIcon}>
-        <View style={styles.profileIcon}>
-          <Text style={styles.profileText}>🏀</Text>
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      
+      // First test the bridge connection
+      console.log('Testing bridge connection...');
+      const connectionTest = await SlateWorkspaceManager.testConnection();
+      console.log('Bridge connection test result:', connectionTest);
+      setBridgeConnected(connectionTest.status === 'connected');
+      setConnectionStatus(connectionTest.message);
+      
+      // Load drafts from iOS Slate app
+      console.log('Loading drafts...');
+      const loadedDrafts = await SlateWorkspaceManager.getDrafts();
+      console.log('Loaded drafts:', loadedDrafts);
+      setDrafts(loadedDrafts);
+    } catch (error) {
+      console.error('Error loading data:', error);
+      setBridgeConnected(false);
+      setConnectionStatus('Connection failed');
+      Alert.alert('Error', 'Failed to connect to iOS Slate app');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCreateNew = async () => {
+    try {
+      console.log('Creating new draft...');
+      const result = await SlateWorkspaceManager.createNewDraft();
+      
+      if (result.success) {
+        console.log('Created new draft:', result.draftId);
+        // Open the workspace with the new draft
+        await handleOpenWorkspace(result.draftId);
+      }
+    } catch (error) {
+      console.error('Error creating new draft:', error);
+      Alert.alert('Error', 'Failed to create new draft');
+    }
+  };
+
+  const handleOpenWorkspace = async (draftId?: string) => {
+    try {
+      console.log('Opening workspace with draft:', draftId || 'new');
+      const result: WorkspaceResult = await SlateWorkspaceManager.openWorkspace(draftId);
+      
+      if (result.success) {
+        console.log('Workspace opened successfully');
+        // The iOS app should now be showing the Slate editing interface
+        Alert.alert('Success', result.message || 'Workspace opened successfully!');
+      } else {
+        console.log('Failed to open workspace');
+        Alert.alert('Error', 'Failed to open workspace');
+      }
+    } catch (error) {
+      console.error('Error opening workspace:', error);
+      Alert.alert('Error', 'Failed to open workspace');
+    }
+  };
+
+  const handleRefresh = () => {
+    loadData();
+  };
+
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#007AFF" />
+          <Text style={styles.loadingText}>Connecting to Slate...</Text>
+          <Text style={styles.statusText}>{connectionStatus}</Text>
         </View>
-      </TouchableOpacity>
-    </View>
-  </View>
-);
+      </SafeAreaView>
+    );
+  }
 
-const StartProjectButton = () => (
-  <TouchableOpacity style={styles.startProjectButton}>
-    <Text style={styles.startProjectText}>Start new project</Text>
-    <Text style={styles.startProjectArrow}>→</Text>
-  </TouchableOpacity>
-);
-
-const QuickStartGrid = () => (
-  <View style={styles.section}>
-    <Text style={styles.sectionTitle}>Quick Start</Text>
-    <View style={styles.quickStartGrid}>
-      {quickStartOptions.map((option) => (
-        <TouchableOpacity key={option.id} style={styles.quickStartOption}>
-          <Text style={styles.quickStartIcon}>{option.icon}</Text>
-          <Text style={styles.quickStartText}>{option.title}</Text>
-          <Text style={styles.quickStartArrow}>›</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  </View>
-);
-
-const RecentProjects = () => (
-  <View style={styles.section}>
-    <View style={styles.sectionHeader}>
-      <Text style={styles.sectionTitle}>Recent Projects</Text>
-      <TouchableOpacity>
-        <Text style={styles.seeAllText}>See all</Text>
-      </TouchableOpacity>
-    </View>
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
-      {recentProjects.map((project) => (
-        <TouchableOpacity key={project.id} style={styles.projectCard}>
-          <View style={styles.projectThumbnail}>
-            <Image source={{ uri: project.thumbnail }} style={styles.thumbnailImage} />
-            <View style={styles.durationBadge}>
-              <Text style={styles.durationText}>{project.duration}</Text>
-            </View>
-            <View style={styles.recordingIndicator} />
-          </View>
-          <View style={styles.projectInfo}>
-            <Text style={styles.projectTitle}>{project.title}</Text>
-            <Text style={styles.projectSubtitle}>{project.lastEdited}</Text>
-          </View>
-          <TouchableOpacity style={styles.projectMenu}>
-            <Text style={styles.menuDots}>⋮</Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
-  </View>
-);
-
-const RecentMedia = () => (
-  <View style={styles.section}>
-    <View style={styles.sectionHeader}>
-      <Text style={styles.sectionTitle}>Recent Media</Text>
-      <TouchableOpacity>
-        <Text style={styles.seeAllText}>See all</Text>
-      </TouchableOpacity>
-    </View>
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
-      {recentMedia.map((media) => (
-        <TouchableOpacity key={media.id} style={styles.mediaCard}>
-          <Image source={{ uri: media.thumbnail }} style={styles.mediaImage} />
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
-  </View>
-);
-
-const BottomNavigation = () => (
-  <View style={styles.bottomNav}>
-    <TouchableOpacity style={styles.navItem}>
-      <Text style={[styles.navIcon, styles.activeNavIcon]}>✨</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.navItem}>
-      <Text style={styles.navIcon}>📺</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.navItem}>
-      <Text style={styles.navIcon}>🖼️</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.navItem}>
-      <Text style={styles.navIcon}>📤</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.navItem}>
-      <Text style={styles.navIcon}>📋</Text>
-    </TouchableOpacity>
-  </View>
-);
-
-const App = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1A1A1A" />
-      <Header />
+      <StatusBar barStyle="light-content" backgroundColor="#1a1a1a" />
+      
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Slate</Text>
+        <View style={styles.headerActions}>
+          <View style={[styles.connectionIndicator, bridgeConnected ? styles.connected : styles.disconnected]} />
+          <TouchableOpacity onPress={handleRefresh} style={styles.refreshButton}>
+            <Text style={styles.refreshText}>⟳</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <View style={styles.content}>
-          <StartProjectButton />
-          <QuickStartGrid />
-          <RecentProjects />
-          <RecentMedia />
+        {/* Connection Status */}
+        <View style={styles.statusContainer}>
+          <Text style={styles.statusLabel}>Bridge Status:</Text>
+          <Text style={[styles.statusValue, bridgeConnected ? styles.connectedText : styles.disconnectedText]}>
+            {connectionStatus}
+          </Text>
+        </View>
+
+        {/* Create New Project Button */}
+        <TouchableOpacity style={styles.createButton} onPress={handleCreateNew}>
+          <View style={styles.createButtonContent}>
+            <View style={styles.createIcon}>
+              <Text style={styles.createIconText}>+</Text>
+            </View>
+            <View style={styles.createTextContainer}>
+              <Text style={styles.createTitle}>Create New Project</Text>
+              <Text style={styles.createSubtitle}>Start a new video editing project</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        {/* Recent Projects */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Recent Projects</Text>
+          
+          {drafts.length > 0 ? (
+            drafts.map((draft) => (
+              <TouchableOpacity
+                key={draft.id}
+                style={styles.projectCard}
+                onPress={() => handleOpenWorkspace(draft.id)}
+              >
+                <Image source={{ uri: draft.previewUrl }} style={styles.projectThumbnail} />
+                <View style={styles.projectDetails}>
+                  <Text style={styles.projectTitle}>{draft.title}</Text>
+                  <Text style={styles.projectMeta}>
+                    {Math.round(draft.duration)}s • {new Date(draft.createdAt).toLocaleDateString()}
+                  </Text>
+                  <View style={styles.projectStatus}>
+                    <View style={[
+                      styles.statusBadge,
+                      draft.approvalStatus === 0 ? styles.draftStatus :
+                      draft.approvalStatus === 1 ? styles.pendingStatus : styles.approvedStatus
+                    ]}>
+                      <Text style={styles.statusText}>
+                        {draft.approvalStatus === 0 ? 'Draft' :
+                         draft.approvalStatus === 1 ? 'Pending' : 'Approved'}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            ))
+          ) : (
+            <View style={styles.emptyState}>
+              <Text style={styles.emptyStateText}>No projects yet</Text>
+              <Text style={styles.emptyStateSubtext}>Create your first video project to get started</Text>
+            </View>
+          )}
+        </View>
+
+        {/* Recent Media */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Recent Media</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.mediaScroll}>
+            {recentMedia.map((media) => (
+              <TouchableOpacity key={media.id} style={styles.mediaItem}>
+                <Image source={{ uri: media.thumbnail }} style={styles.mediaThumbnail} />
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
         </View>
       </ScrollView>
-      <BottomNavigation />
     </SafeAreaView>
   );
 };
@@ -191,210 +227,209 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A1A1A',
+    backgroundColor: '#1a1a1a',
   },
-  scrollView: {
+  loadingContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1a1a1a',
   },
-  content: {
-    paddingBottom: 20,
+  loadingText: {
+    color: '#ffffff',
+    fontSize: 18,
+    marginTop: 16,
+  },
+  statusText: {
+    color: '#888',
+    fontSize: 14,
+    marginTop: 8,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: '#1A1A1A',
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#333',
   },
   headerTitle: {
+    color: '#ffffff',
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#FFFFFF',
   },
-  headerIcons: {
+  headerActions: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  headerIcon: {
-    marginLeft: 15,
-  },
-  headerIconText: {
-    fontSize: 20,
-    color: '#FFFFFF',
-  },
-  profileIcon: {
-    width: 35,
-    height: 35,
-    borderRadius: 20,
-    backgroundColor: '#E53E3E',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  profileText: {
-    fontSize: 16,
-  },
-  startProjectButton: {
-    backgroundColor: '#48BB78',
-    marginHorizontal: 20,
-    marginVertical: 20,
-    paddingVertical: 18,
-    paddingHorizontal: 25,
-    borderRadius: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  startProjectText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  startProjectArrow: {
-    color: '#FFFFFF',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  section: {
-    marginBottom: 30,
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    marginBottom: 15,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#FFFFFF',
-  },
-  seeAllText: {
-    fontSize: 16,
-    color: '#A0AEC0',
-  },
-  quickStartGrid: {
-    paddingHorizontal: 20,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  quickStartOption: {
-    width: (width - 60) / 2,
-    backgroundColor: '#2D3748',
-    padding: 15,
-    borderRadius: 12,
-    marginBottom: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  quickStartIcon: {
-    fontSize: 20,
-    marginRight: 10,
-  },
-  quickStartText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '500',
-    flex: 1,
-  },
-  quickStartArrow: {
-    color: '#A0AEC0',
-    fontSize: 18,
-  },
-  horizontalScroll: {
-    paddingLeft: 20,
-  },
-  projectCard: {
-    marginRight: 15,
-    width: 200,
-  },
-  projectThumbnail: {
-    position: 'relative',
-    borderRadius: 12,
-    overflow: 'hidden',
-    marginBottom: 10,
-  },
-  thumbnailImage: {
-    width: 200,
-    height: 250,
-    backgroundColor: '#2D3748',
-  },
-  durationBadge: {
-    position: 'absolute',
-    bottom: 10,
-    left: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 6,
-  },
-  durationText: {
-    color: '#FFFFFF',
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  recordingIndicator: {
-    position: 'absolute',
-    top: 10,
-    left: 10,
+  connectionIndicator: {
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#E53E3E',
+    marginRight: 12,
   },
-  projectInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+  connected: {
+    backgroundColor: '#4CAF50',
   },
-  projectTitle: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '500',
+  disconnected: {
+    backgroundColor: '#F44336',
+  },
+  refreshButton: {
+    padding: 8,
+  },
+  refreshText: {
+    color: '#007AFF',
+    fontSize: 18,
+  },
+  scrollView: {
     flex: 1,
   },
-  projectSubtitle: {
-    color: '#A0AEC0',
+  statusContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    backgroundColor: '#2a2a2a',
+    marginHorizontal: 20,
+    marginTop: 16,
+    borderRadius: 8,
+  },
+  statusLabel: {
+    color: '#888',
     fontSize: 14,
-    marginTop: 2,
   },
-  projectMenu: {
-    padding: 5,
+  statusValue: {
+    fontSize: 14,
+    fontWeight: '500',
   },
-  menuDots: {
-    color: '#A0AEC0',
+  connectedText: {
+    color: '#4CAF50',
+  },
+  disconnectedText: {
+    color: '#F44336',
+  },
+  createButton: {
+    margin: 20,
+    backgroundColor: '#007AFF',
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  createButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 20,
+  },
+  createIcon: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  createIconText: {
+    color: '#ffffff',
+    fontSize: 32,
+    fontWeight: '300',
+  },
+  createTextContainer: {
+    flex: 1,
+  },
+  createTitle: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  createSubtitle: {
+    color: 'rgba(255, 255, 255, 0.8)',
+    fontSize: 14,
+  },
+  section: {
+    paddingHorizontal: 20,
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    color: '#ffffff',
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 16,
+  },
+  projectCard: {
+    flexDirection: 'row',
+    backgroundColor: '#2a2a2a',
+    borderRadius: 12,
+    marginBottom: 12,
+    overflow: 'hidden',
+  },
+  projectThumbnail: {
+    width: 100,
+    height: 80,
+    backgroundColor: '#333',
+  },
+  projectDetails: {
+    flex: 1,
+    padding: 12,
+    justifyContent: 'space-between',
+  },
+  projectTitle: {
+    color: '#ffffff',
     fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 4,
   },
-  mediaCard: {
-    marginRight: 15,
+  projectMeta: {
+    color: '#888',
+    fontSize: 12,
+    marginBottom: 8,
   },
-  mediaImage: {
+  projectStatus: {
+    flexDirection: 'row',
+  },
+  statusBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+  },
+  draftStatus: {
+    backgroundColor: 'rgba(255, 193, 7, 0.2)',
+  },
+  pendingStatus: {
+    backgroundColor: 'rgba(255, 152, 0, 0.2)',
+  },
+  approvedStatus: {
+    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+  },
+  emptyState: {
+    alignItems: 'center',
+    paddingVertical: 40,
+  },
+  emptyStateText: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: '500',
+    marginBottom: 8,
+  },
+  emptyStateSubtext: {
+    color: '#888',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  mediaScroll: {
+    marginHorizontal: -20,
+    paddingHorizontal: 20,
+  },
+  mediaItem: {
+    marginRight: 12,
+  },
+  mediaThumbnail: {
     width: 120,
     height: 120,
-    borderRadius: 12,
-    backgroundColor: '#2D3748',
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    backgroundColor: '#2D3748',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    justifyContent: 'space-around',
-    borderTopWidth: 1,
-    borderTopColor: '#4A5568',
-  },
-  navItem: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  navIcon: {
-    fontSize: 22,
-    color: '#A0AEC0',
-  },
-  activeNavIcon: {
-    color: '#48BB78',
+    borderRadius: 8,
+    backgroundColor: '#333',
   },
 });
 
