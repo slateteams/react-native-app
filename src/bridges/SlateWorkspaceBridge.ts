@@ -56,6 +56,10 @@ export interface SlateWorkspaceBridgeInterface {
   getRecentMedia(): Promise<MediaItem[]>;
 }
 
+// Debug: Log available native modules
+console.log('🔍 Available Native Modules:', Object.keys(NativeModules));
+console.log('🔍 SlateWorkspaceBridge available:', !!NativeModules.SlateWorkspaceBridge);
+
 const SlateWorkspaceBridgeNative = NativeModules.SlateWorkspaceBridge as SlateWorkspaceBridgeInterface;
 
 // Export a manager class that wraps the native module
@@ -64,6 +68,9 @@ export class SlateWorkspaceManager {
    * Test the connection to the native Slate bridge
    */
   static async testConnection(): Promise<ConnectionTest> {
+    if (!SlateWorkspaceBridgeNative) {
+      throw new Error('SlateWorkspaceBridge native module not found. Available modules: ' + Object.keys(NativeModules).join(', '));
+    }
     return SlateWorkspaceBridgeNative.testConnection();
   }
   
@@ -71,6 +78,9 @@ export class SlateWorkspaceManager {
    * Get all available drafts from the iOS Slate app
    */
   static async getDrafts(): Promise<Draft[]> {
+    if (!SlateWorkspaceBridgeNative) {
+      throw new Error('SlateWorkspaceBridge native module not found');
+    }
     return SlateWorkspaceBridgeNative.getDrafts();
   }
   
@@ -79,6 +89,9 @@ export class SlateWorkspaceManager {
    * @param draftId Optional draft ID to edit, creates new draft if not provided
    */
   static async openWorkspace(draftId?: string): Promise<WorkspaceResult> {
+    if (!SlateWorkspaceBridgeNative) {
+      throw new Error('SlateWorkspaceBridge native module not found');
+    }
     return SlateWorkspaceBridgeNative.openWorkspace(draftId || null);
   }
   
@@ -86,6 +99,9 @@ export class SlateWorkspaceManager {
    * Create a new draft in the iOS Slate app
    */
   static async createNewDraft(): Promise<{ success: boolean; draftId: string }> {
+    if (!SlateWorkspaceBridgeNative) {
+      throw new Error('SlateWorkspaceBridge native module not found');
+    }
     return SlateWorkspaceBridgeNative.createNewDraft();
   }
   
@@ -93,6 +109,9 @@ export class SlateWorkspaceManager {
    * Get recent media items available for editing
    */
   static async getRecentMedia(): Promise<MediaItem[]> {
+    if (!SlateWorkspaceBridgeNative) {
+      throw new Error('SlateWorkspaceBridge native module not found');
+    }
     return SlateWorkspaceBridgeNative.getRecentMedia();
   }
 }
