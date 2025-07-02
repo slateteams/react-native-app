@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1F98FCCF29BF81F12F67F6 /* ContentEditVCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0151385E71091AB6A62156C /* ContentEditVCWrapper.swift */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		57146D842E145EEE000D0E2A /* SlateWorkspaceBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57146D812E145EEE000D0E2A /* SlateWorkspaceBridge.swift */; };
 		57146D852E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 57146D832E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.m */; };
@@ -32,6 +33,7 @@
 		77F48418F57770C629E710A5 /* Pods-slateReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-slateReactNative.release.xcconfig"; path = "Target Support Files/Pods-slateReactNative/Pods-slateReactNative.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = slateReactNative/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5803DD7BC62C0E33315B019 /* Pods-slateReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-slateReactNative.debug.xcconfig"; path = "Target Support Files/Pods-slateReactNative/Pods-slateReactNative.debug.xcconfig"; sourceTree = "<group>"; };
+		C0151385E71091AB6A62156C /* ContentEditVCWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentEditVCWrapper.swift; path = "../../ios-app/react-native-app/ios/slateReactNative/ContentEditVCWrapper.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E2AA58DE037D2CC50653F9A /* ios-app */ = {
+			isa = PBXGroup;
+			children = (
+				8330F112EECE5D42269217D5 /* react-native-app */,
+			);
+			name = "ios-app";
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* slateReactNative */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,11 +83,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7C8489D7DD446E665B1DE529 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				E10B9E9FF561757D62662C78 /* slateReactNative */,
+			);
+			name = ios;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Libraries;
+			sourceTree = "<group>";
+		};
+		8330F112EECE5D42269217D5 /* react-native-app */ = {
+			isa = PBXGroup;
+			children = (
+				7C8489D7DD446E665B1DE529 /* ios */,
+			);
+			name = "react-native-app";
 			sourceTree = "<group>";
 		};
 		83CBB9F61A601CBA00E9B192 = {
@@ -88,6 +114,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				FDBACA0697F1657046AF58D8 /* .. */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -109,6 +136,22 @@
 				77F48418F57770C629E710A5 /* Pods-slateReactNative.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E10B9E9FF561757D62662C78 /* slateReactNative */ = {
+			isa = PBXGroup;
+			children = (
+				C0151385E71091AB6A62156C /* ContentEditVCWrapper.swift */,
+			);
+			name = slateReactNative;
+			sourceTree = "<group>";
+		};
+		FDBACA0697F1657046AF58D8 /* .. */ = {
+			isa = PBXGroup;
+			children = (
+				0E2AA58DE037D2CC50653F9A /* ios-app */,
+			);
+			name = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +306,7 @@
 				57146D852E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.m in Sources */,
 				57146D862E145EEE000D0E2A /* SlateWorkspaceBridge.m in Sources */,
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
+				0A1F98FCCF29BF81F12F67F6 /* ContentEditVCWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

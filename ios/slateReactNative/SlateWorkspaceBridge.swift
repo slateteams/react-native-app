@@ -68,14 +68,25 @@ class SlateWorkspaceBridge: NSObject, RCTBridgeModule {
         rejecter reject: @escaping RCTPromiseRejectBlock
     ) {
         DispatchQueue.main.async {
-            // For now, we'll just log that workspace should open
-            // Later we'll integrate with actual Slate workspace
             NSLog("Opening workspace with draft ID: \(draftId ?? "new")")
             
-            // TODO: Integrate with actual Slate ContentEditVC
-            // This is where we'll present the iOS Slate editing interface
+            // Get the root view controller
+            guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
+                reject("NO_ROOT_VC", "No root view controller found", nil)
+                return
+            }
             
-            resolve(["success": true, "message": "Workspace opened (mock)"])
+            // Use ContentEditVCWrapper instead of the real ContentEditVC
+            let contentEditVC = ContentEditVCWrapper()
+            contentEditVC.draftId = draftId
+            
+            // Present the view controller
+            let navigationController = UINavigationController(rootViewController: contentEditVC)
+            navigationController.modalPresentationStyle = .fullScreen
+            
+            rootViewController.present(navigationController, animated: true) {
+                resolve(["success": true, "message": "Workspace opened successfully"])
+            }
         }
     }
     

@@ -23,8 +23,8 @@ target 'slateReactNative' do
     :fabric_enabled => true
   )
 
-  # 🎬 SLATE INTEGRATION - Temporarily disabled for stable bridge development
-  # pod 'Slate/ReactNative', :path => '../../ios-app'
+  # Using the independent SlateReactNative podspec with MBProgressHUD
+  pod 'SlateReactNative', :path => '../../ios-app'
 
   post_install do |installer|
     # Standard React Native post-install
@@ -34,6 +34,5 @@ target 'slateReactNative' do
       :mac_catalyst_enabled => false
     )
     
-    # 🎬 CLEAN REACT NATIVE BUILD - No additional configuration needed
   end
 end
