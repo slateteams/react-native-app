@@ -76,9 +76,18 @@ class SlateWorkspaceBridge: NSObject, RCTBridgeModule {
                 return
             }
             
-            // Use ContentEditVCWrapper instead of the real ContentEditVC
-            let contentEditVC = ContentEditVCWrapper()
-            contentEditVC.draftId = draftId
+            // Load ContentEditVC from the Main storyboard
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let contentEditVC = storyboard.instantiateViewController(withIdentifier: "ContentEditVC") as? ContentEditVC else {
+                reject("STORYBOARD_ERROR", "Could not load ContentEditVC from storyboard", nil)
+                return
+            }
+            
+            // Set the draft ID if provided
+            if let draftId = draftId {
+                // TODO: Set draft ID on ContentEditVC when the proper API is available
+                NSLog("Setting draft ID: \(draftId)")
+            }
             
             // Present the view controller
             let navigationController = UINavigationController(rootViewController: contentEditVC)
@@ -146,9 +155,15 @@ class SlateWorkspaceBridge: NSObject, RCTBridgeModule {
                 return
             }
             
-            // Create a new ContentEditVCWrapper for new project creation
-            let contentEditVC = ContentEditVCWrapper()
-            contentEditVC.draftId = nil // No draft ID means create new
+            // Load ContentEditVC from the Main storyboard
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let contentEditVC = storyboard.instantiateViewController(withIdentifier: "ContentEditVC") as? ContentEditVC else {
+                reject("STORYBOARD_ERROR", "Could not load ContentEditVC from storyboard", nil)
+                return
+            }
+            
+            // No draft ID means create new project
+            NSLog("Creating new project")
             
             // Present the view controller
             let navigationController = UINavigationController(rootViewController: contentEditVC)

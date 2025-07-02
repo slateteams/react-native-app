@@ -5,7 +5,22 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-# Standard CocoaPods sources only for clean React Native build
+# Add all Slate internal pod sources for ContentEditVC dependencies
+source 'https://github.com/slateteams/ios-fm-rendering'
+source 'https://github.com/slateteams/ios-server-data'
+source 'https://github.com/slateteams/ios-fm-sharing'
+source 'https://github.com/slateteams/ios-fm-textview'
+source 'https://github.com/slateteams/ios-nfl-sharing'
+source 'https://github.com/slateteams/ios-fm-lib'
+source 'https://github.com/slateteams/ios-nfl-football-api'
+source 'https://github.com/slateteams/ios-nfl-id-api'
+source 'https://github.com/slateteams/ios-app-data'
+source 'https://github.com/slateteams/ios-api'
+source 'https://github.com/slateteams/ios-integration-photoshelter'
+source 'https://github.com/slateteams/ios-integration-slack'
+source 'https://github.com/slateteams/ios-integration-getty'
+source 'https://github.com/slateteams/ios-effects'
+# Standard CocoaPods source for public dependencies
 source 'https://cdn.cocoapods.org/'
 
 platform :ios, '16.0'
