@@ -10,7 +10,6 @@
 		0A1F98FCCF29BF81F12F67F6 /* ContentEditVCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0151385E71091AB6A62156C /* ContentEditVCWrapper.swift */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		57146D842E145EEE000D0E2A /* SlateWorkspaceBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57146D812E145EEE000D0E2A /* SlateWorkspaceBridge.swift */; };
-		57146D852E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 57146D832E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.m */; };
 		57146D862E145EEE000D0E2A /* SlateWorkspaceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 57146D802E145EEE000D0E2A /* SlateWorkspaceBridge.m */; };
 		7108998D00A94218EA5671E1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
@@ -27,8 +26,6 @@
 		57146D7F2E145EEE000D0E2A /* slateReactNative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "slateReactNative-Bridging-Header.h"; path = "slateReactNative/slateReactNative-Bridging-Header.h"; sourceTree = "<group>"; };
 		57146D802E145EEE000D0E2A /* SlateWorkspaceBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SlateWorkspaceBridge.m; path = slateReactNative/SlateWorkspaceBridge.m; sourceTree = "<group>"; };
 		57146D812E145EEE000D0E2A /* SlateWorkspaceBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SlateWorkspaceBridge.swift; path = slateReactNative/SlateWorkspaceBridge.swift; sourceTree = "<group>"; };
-		57146D822E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SlateWorkspaceBridgeObjC.h; path = slateReactNative/SlateWorkspaceBridgeObjC.h; sourceTree = "<group>"; };
-		57146D832E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SlateWorkspaceBridgeObjC.m; path = slateReactNative/SlateWorkspaceBridgeObjC.m; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = slateReactNative/AppDelegate.swift; sourceTree = "<group>"; };
 		77F48418F57770C629E710A5 /* Pods-slateReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-slateReactNative.release.xcconfig"; path = "Target Support Files/Pods-slateReactNative/Pods-slateReactNative.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = slateReactNative/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,8 +60,6 @@
 				57146D7F2E145EEE000D0E2A /* slateReactNative-Bridging-Header.h */,
 				57146D802E145EEE000D0E2A /* SlateWorkspaceBridge.m */,
 				57146D812E145EEE000D0E2A /* SlateWorkspaceBridge.swift */,
-				57146D822E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.h */,
-				57146D832E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -247,9 +242,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-slateReactNative/Pods-slateReactNative-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-slateReactNative/Pods-slateReactNative-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -264,9 +263,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-slateReactNative/Pods-slateReactNative-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-slateReactNative/Pods-slateReactNative-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -303,7 +306,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				57146D842E145EEE000D0E2A /* SlateWorkspaceBridge.swift in Sources */,
-				57146D852E145EEE000D0E2A /* SlateWorkspaceBridgeObjC.m in Sources */,
 				57146D862E145EEE000D0E2A /* SlateWorkspaceBridge.m in Sources */,
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
 				0A1F98FCCF29BF81F12F67F6 /* ContentEditVCWrapper.swift in Sources */,
@@ -447,10 +449,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -530,10 +529,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

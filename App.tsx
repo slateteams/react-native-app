@@ -81,17 +81,52 @@ const App: React.FC = () => {
 
   const handleCreateNew = async () => {
     try {
-      console.log('Creating new draft...');
-      const result = await SlateWorkspaceManager.createNewDraft();
+      console.log('Opening content editor for new project...');
+      
+      // Option 1: Direct content editor (simpler approach)
+      const result = await SlateWorkspaceManager.openContentEditor();
       
       if (result.success) {
-        console.log('Created new draft:', result.draftId);
-        // Open the workspace with the new draft
-        await handleOpenWorkspace(result.draftId);
+        console.log('Content editor opened successfully:', result.message);
+        // Refresh the drafts list after a short delay in case user creates something
+        setTimeout(() => {
+          loadData();
+        }, 1000);
+      } else {
+        console.error('Failed to open content editor:', result.message);
+        Alert.alert('Error', `Failed to open content editor: ${result.message}`);
       }
+      
+      // Option 2: Create draft first, then open workspace (previous approach)
+      // Uncomment below if you prefer the draft-first approach:
+      /*
+      // First create a new draft
+      const draftResult = await SlateWorkspaceManager.createNewDraft();
+      
+      if (draftResult.success) {
+        console.log('New draft created:', draftResult.draftId);
+        
+        // Now open the workspace with the new draft
+        const workspaceResult = await SlateWorkspaceManager.openWorkspace(draftResult.draftId);
+        
+        if (workspaceResult.success) {
+          console.log('Workspace opened successfully for new draft');
+          setTimeout(() => {
+            loadData();
+          }, 1000);
+        } else {
+          console.error('Failed to open workspace:', workspaceResult.message);
+          Alert.alert('Error', `Failed to open workspace: ${workspaceResult.message}`);
+        }
+      } else {
+        console.error('Failed to create new draft');
+        Alert.alert('Error', 'Failed to create new draft');
+      }
+      */
+      
     } catch (error) {
-      console.error('Error creating new draft:', error);
-      Alert.alert('Error', 'Failed to create new draft');
+      console.error('Error opening content editor:', error);
+      Alert.alert('Error', 'Failed to open content editor');
     }
   };
 
@@ -163,7 +198,7 @@ const App: React.FC = () => {
             </View>
             <View style={styles.createTextContainer}>
               <Text style={styles.createTitle}>Create New Project</Text>
-              <Text style={styles.createSubtitle}>Start a new video editing project</Text>
+              <Text style={styles.createSubtitle}>Open Slate content editor to start creating</Text>
             </View>
           </View>
         </TouchableOpacity>

@@ -2123,8 +2123,12 @@ PODS:
     - React-perflogger (= 0.80.0)
     - React-utils (= 0.80.0)
     - SocketRocket
+  - SDWebImage (5.12.6):
+    - SDWebImage/Core (= 5.12.6)
+  - SDWebImage/Core (5.12.6)
   - SlateReactNative (1.0.0):
     - MBProgressHUD (~> 1.1)
+    - SDWebImage (= 5.12.6)
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
 
@@ -2208,6 +2212,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - MBProgressHUD
+    - SDWebImage
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -2432,10 +2437,11 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: 3267432b637c9b38e86961b287f784ee1b08dde0
   ReactCodegen: a492cab89cc8de48b8b65bda6714808786a411bd
   ReactCommon: 3d916b13ac777fc387b8035ab80ceb90aca4f747
-  SlateReactNative: 6648bff9e7d639c4d3a96191a3d140277c365b39
+  SDWebImage: a47aea9e3d8816015db4e523daff50cfd294499d
+  SlateReactNative: ef529dbcdff01632c226885d587a374a934ffa70
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 53862134c7e6445831a363d4152ea46e8820d96b
 
-PODFILE CHECKSUM: fd602d817a295a91590faa70237b654a99c0a6c3
+PODFILE CHECKSUM: fd77f5548f1c6dad6f0c564bb24ece8354f5baa3
 
 COCOAPODS: 1.15.2

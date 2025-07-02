@@ -1,11 +1,14 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  slateReactNative-Bridging-Header.h
+//  slateReactNative
+//
+//  This file enables React Native to interface with Swift code
 //
 
 #import <React/RCTBridgeModule.h>
-#import <React/RCTBridge.h>
-#import <React/RCTEventDispatcher.h>
-#import <React/RCTRootView.h>
+#import <React/RCTViewManager.h>
 #import <React/RCTUtils.h>
-#import <React/RCTConvert.h>
-#import <React/RCTBundleURLProvider.h> 
+
+// Import any Objective-C headers that Swift needs to access
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h> 

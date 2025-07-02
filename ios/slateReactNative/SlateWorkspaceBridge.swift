@@ -132,4 +132,31 @@ class SlateWorkspaceBridge: NSObject, RCTBridgeModule {
             resolve(mockMedia)
         }
     }
+    
+    @objc func openContentEditor(
+        _ resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+    ) {
+        DispatchQueue.main.async {
+            NSLog("Opening content editor for new project...")
+            
+            // Get the root view controller
+            guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
+                reject("NO_ROOT_VC", "No root view controller found", nil)
+                return
+            }
+            
+            // Create a new ContentEditVCWrapper for new project creation
+            let contentEditVC = ContentEditVCWrapper()
+            contentEditVC.draftId = nil // No draft ID means create new
+            
+            // Present the view controller
+            let navigationController = UINavigationController(rootViewController: contentEditVC)
+            navigationController.modalPresentationStyle = .fullScreen
+            
+            rootViewController.present(navigationController, animated: true) {
+                resolve(["success": true, "message": "Content editor opened successfully"])
+            }
+        }
+    }
 } 

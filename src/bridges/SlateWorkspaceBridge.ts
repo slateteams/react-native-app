@@ -54,6 +54,11 @@ export interface SlateWorkspaceBridgeInterface {
    * Get recent media items from the photo library/camera roll
    */
   getRecentMedia(): Promise<MediaItem[]>;
+  
+  /**
+   * Open the content editor directly for creating new content
+   */
+  openContentEditor(): Promise<WorkspaceResult>;
 }
 
 // Debug: Log available native modules
@@ -113,6 +118,16 @@ export class SlateWorkspaceManager {
       throw new Error('SlateWorkspaceBridge native module not found');
     }
     return SlateWorkspaceBridgeNative.getRecentMedia();
+  }
+  
+  /**
+   * Open the content editor directly for creating new content
+   */
+  static async openContentEditor(): Promise<WorkspaceResult> {
+    if (!SlateWorkspaceBridgeNative) {
+      throw new Error('SlateWorkspaceBridge native module not found');
+    }
+    return SlateWorkspaceBridgeNative.openContentEditor();
   }
 }
 
