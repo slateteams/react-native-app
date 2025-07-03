@@ -169,6 +169,25 @@
 			dependencies = (
 			);
 			name = slateReactNative;
+			packageProductDependencies = (
+				995A508F2D25C06375B1E930 /* FirebaseCore */,
+				B899508909620F3BA0C61DF1 /* FirebaseAuth */,
+				36F0935B924AA283932BDC97 /* FirebaseAnalytics */,
+				B5DEF39527B5B1C34F6CBD44 /* FirebaseCrashlytics */,
+				6E24D45F361D3BE11AB9340D /* FirebaseStorage */,
+				96791D4919EA5C615B142603 /* FirebaseRemoteConfig */,
+				863BEA0E0FB3E338418AAA85 /* FirebasePerformance */,
+				A3327C96F3357F06F63CB1EE /* SDWebImage */,
+				D2DF7EC46E65812D559A5932 /* MBProgressHUD */,
+				D92842992AE71B34D3A6E3A2 /* CocoaLumberjack */,
+				7CA2D0C2E2B917A2701171E8 /* Alamofire */,
+				D2A449BB0744544B28667CFC /* CryptoSwift */,
+				352C39D8F0891C4F82EF5EFA /* Reachability */,
+				7E08F78EC95FD4F11DE6AD9C /* SwiftyJSON */,
+				A06EB134D101C06510A55C0B /* FacebookCore */,
+				315D9A4D16B938C25909BE65 /* FacebookShare */,
+				8C9EE6728F0014BEF67B2E72 /* SwiftyJSON */,
+			);
 			productName = slateReactNative;
 			productReference = 13B07F961A680F5B00A75B9A /* slateReactNative.app */;
 			productType = "com.apple.product-type.application";
@@ -195,6 +214,17 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+				16AFD2FF3A1BDC44CD357F6A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				684A0ECC6641D32BB5351DA2 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				3A4DDBD2DBADFB75F6AEF502 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
+				AAED0ACAEB3B65D421F9E662 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+				06CC1380D5A0704327186539 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				5C446936CA5CAC17FF5DD795 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
+				97335E57E8EAA11C14C15441 /* XCRemoteSwiftPackageReference "Reachability.swift" */,
+				58D5C243E4308B7288868454 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				C3734D2F3301C9B4A76DFA4A /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -557,6 +587,177 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0377CB5F0E20A6DD0D5561BD /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		06CC1380D5A0704327186539 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.0;
+			};
+		};
+		16AFD2FF3A1BDC44CD357F6A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		3A4DDBD2DBADFB75F6AEF502 /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jdg/MBProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+		58D5C243E4308B7288868454 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 16.0.0;
+			};
+		};
+		5C446936CA5CAC17FF5DD795 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.0;
+			};
+		};
+		684A0ECC6641D32BB5351DA2 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.12.0;
+			};
+		};
+		97335E57E8EAA11C14C15441 /* XCRemoteSwiftPackageReference "Reachability.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		AAED0ACAEB3B65D421F9E662 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.6.2;
+			};
+		};
+		C3734D2F3301C9B4A76DFA4A /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		315D9A4D16B938C25909BE65 /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58D5C243E4308B7288868454 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
+		};
+		352C39D8F0891C4F82EF5EFA /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97335E57E8EAA11C14C15441 /* XCRemoteSwiftPackageReference "Reachability.swift" */;
+			productName = Reachability;
+		};
+		36F0935B924AA283932BDC97 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16AFD2FF3A1BDC44CD357F6A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		6E24D45F361D3BE11AB9340D /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16AFD2FF3A1BDC44CD357F6A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		7CA2D0C2E2B917A2701171E8 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06CC1380D5A0704327186539 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		7E08F78EC95FD4F11DE6AD9C /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0377CB5F0E20A6DD0D5561BD /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		863BEA0E0FB3E338418AAA85 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16AFD2FF3A1BDC44CD357F6A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+		8C9EE6728F0014BEF67B2E72 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3734D2F3301C9B4A76DFA4A /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		96791D4919EA5C615B142603 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16AFD2FF3A1BDC44CD357F6A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		995A508F2D25C06375B1E930 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16AFD2FF3A1BDC44CD357F6A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		A06EB134D101C06510A55C0B /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58D5C243E4308B7288868454 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		A3327C96F3357F06F63CB1EE /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 684A0ECC6641D32BB5351DA2 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		B5DEF39527B5B1C34F6CBD44 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16AFD2FF3A1BDC44CD357F6A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		B899508909620F3BA0C61DF1 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16AFD2FF3A1BDC44CD357F6A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D2A449BB0744544B28667CFC /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C446936CA5CAC17FF5DD795 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
+		D2DF7EC46E65812D559A5932 /* MBProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A4DDBD2DBADFB75F6AEF502 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
+			productName = MBProgressHUD;
+		};
+		D92842992AE71B34D3A6E3A2 /* CocoaLumberjack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AAED0ACAEB3B65D421F9E662 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }
