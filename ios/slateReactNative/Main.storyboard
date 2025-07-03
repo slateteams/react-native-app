@@ -18,7 +18,7 @@
         <!--ContentEditVC-->
         <scene sceneID="h7C-fE-giW">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cf8-zC-Ztc" userLabel="ContentEditVC" customClass="ContentEditVC" customModule="Slate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cf8-zC-Ztc" userLabel="ContentEditVC" customClass="ContentEditVC" customModule="slateReactNative" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bQc-SH-bta"/>
                         <viewControllerLayoutGuide type="bottom" id="IWh-Hd-5n5"/>
@@ -33,7 +33,7 @@
                             <userLayoutGuide location="843" affinity="minY"/>
                         </userGuides>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVW-Mt-L0y" customClass="TransparentBackgroundView" customModule="Slate" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVW-Mt-L0y" customClass="TransparentBackgroundView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="414" height="467"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -46,22 +46,22 @@ start creating content…</string>
                                 <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.73333333333333328" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usB-Nf-D26" customClass="SnapZoneView" customModule="Slate" customModuleProvider="target">
+                            <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usB-Nf-D26" customClass="SnapZoneView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="414" height="467"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="467" id="e78-x1-UsI"/>
                                 </constraints>
                             </view>
-                            <view opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGe-43-j7h" userLabel="Text Mode Dim View" customClass="DebugDimView" customModule="Slate" customModuleProvider="target">
+                            <view opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGe-43-j7h" userLabel="Text Mode Dim View" customClass="DebugDimView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="414" height="467"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             </view>
-                            <view hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zho-9d-Xf9" userLabel="Max Layers View" customClass="MaxLayersView" customModule="Slate" customModuleProvider="target">
+                            <view hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zho-9d-Xf9" userLabel="Max Layers View" customClass="MaxLayersView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="414" height="467"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ti6-ey-fa5" userLabel="FontTextArea" customClass="FontComposerTextAreaView" customModule="Slate" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ti6-ey-fa5" userLabel="FontTextArea" customClass="FontComposerTextAreaView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="414" height="467"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRZ-EC-eCx" customClass="StyledTextView" customModule="FMTextView">
@@ -81,7 +81,7 @@ start creating content…</string>
                                     <outlet property="styledTextView" destination="qRZ-EC-eCx" id="IM5-E2-r3A"/>
                                 </connections>
                             </view>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZCk-gK-gII" userLabel="Top Black View" customClass="TopBottomView" customModule="Slate" customModuleProvider="target">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZCk-gK-gII" userLabel="Top Black View" customClass="TopBottomView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                 <viewLayoutGuide key="safeArea" id="NbF-yJ-Zgp"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,7 +90,7 @@ start creating content…</string>
                                     <outletCollection property="gestureRecognizers" destination="ihg-OM-hZ6" appends="YES" id="K3v-dU-MoO"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeR-Ax-pgc" userLabel="Bottom Black View" customClass="TopBottomView" customModule="Slate" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeR-Ax-pgc" userLabel="Bottom Black View" customClass="TopBottomView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="515" width="414" height="381"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -112,7 +112,7 @@ start creating content…</string>
                                     <constraint firstAttribute="width" id="Cs7-VN-MoD"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6S-5Y-eYp" customClass="AssetDurationView" customModule="Slate" customModuleProvider="target">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6S-5Y-eYp" customClass="AssetDurationView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNq-8B-Joj">
@@ -144,7 +144,7 @@ start creating content…</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHX-rq-Hpq" customClass="TrimmerView" customModule="Slate" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHX-rq-Hpq" customClass="TrimmerView" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="30" y="743" width="354" height="70"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -222,19 +222,19 @@ start creating content…</string>
                                     <outlet property="trimmer" destination="CHX-rq-Hpq" id="40S-MV-r1f"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRb-F1-5yb" customClass="TimelineView" customModule="Slate" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRb-F1-5yb" customClass="TimelineView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0c-06-m8C" userLabel="Max Layers View On Translating" customClass="MaxLayersView" customModule="Slate" customModuleProvider="target">
+                            <view hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0c-06-m8C" userLabel="Max Layers View On Translating" customClass="MaxLayersView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="414" height="467"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y8X-BX-Bkp" customClass="SnapHintsView" customModule="Slate" customModuleProvider="target">
+                            <view opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y8X-BX-Bkp" customClass="SnapHintsView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="414" height="467"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Sg-v4-hBg" customClass="AnimatableChevronView" customModule="Slate" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Sg-v4-hBg" customClass="AnimatableChevronView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="195" y="744" width="24" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -253,21 +253,21 @@ start creating content…</string>
                                     <outletCollection property="gestureRecognizers" destination="Bj7-tZ-lYF" appends="YES" id="C3J-On-yXq"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4K-ab-msM" customClass="ContentEditingActionPanel" customModule="Slate" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4K-ab-msM" customClass="ContentEditingActionPanel" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="792" width="414" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="fQi-WP-SnE"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjO-c8-rST" customClass="ScrubberView" customModule="Slate" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjO-c8-rST" customClass="ScrubberView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="783" width="414" height="16"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="zc6-qf-08H"/>
                                 </constraints>
                             </view>
-                            <view opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiu-XF-Ea2" customClass="LayoutPanelView" customModule="Slate" customModuleProvider="target">
+                            <view opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiu-XF-Ea2" customClass="LayoutPanelView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="27" y="783" width="360" height="58"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRp-v5-Xoc">
@@ -810,7 +810,7 @@ start creating content…</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
-                            <view opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmY-Mf-3wR" userLabel="Overal Dim View" customClass="DebugDimView" customModule="Slate" customModuleProvider="target">
+                            <view opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmY-Mf-3wR" userLabel="Overal Dim View" customClass="DebugDimView" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="187" width="414" height="709"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.60316220238095242" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             </view>
@@ -845,7 +845,7 @@ start creating content…</string>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yoo-D1-EBb" customClass="GifImageView" customModule="Slate" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yoo-D1-EBb" customClass="GifImageView" customModule="slateReactNative" customModuleProvider="target">
                                                 <rect key="frame" x="175" y="0.0" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="55A-gY-bFW"/>
@@ -1048,7 +1048,7 @@ start creating content…</string>
                         <segue destination="b7f-ds-2ny" kind="unwind" identifier="imagePicker" unwindAction="returnToGalleryVC:" id="lvC-VR-lkP"/>
                         <segue destination="b7f-ds-2ny" kind="unwind" identifier="camera" unwindAction="returnToCameraVC:" id="lY3-Rb-x8w"/>
                         <segue destination="oXk-Ic-iUU" kind="presentation" identifier="MediaSelection" modalPresentationStyle="overCurrentContext" id="KAi-7X-mGg"/>
-                        <segue destination="DId-kJ-9ig" kind="custom" identifier="dimensionVC" customClass="DimensionSegue" customModule="Slate" customModuleProvider="target" id="KTR-Ep-07L"/>
+                        <segue destination="DId-kJ-9ig" kind="custom" identifier="dimensionVC" customClass="DimensionSegue" customModule="slateReactNative" customModuleProvider="target" id="KTR-Ep-07L"/>
                         <segue destination="Hqm-Xt-Qk7" kind="presentation" identifier="filterVC" modalPresentationStyle="overCurrentContext" id="BcB-Es-JWs"/>
                         <segue destination="7GL-T9-5kR" kind="presentation" identifier="stickerVC" modalPresentationStyle="overCurrentContext" id="7dF-85-LSj"/>
                         <segue destination="YOf-jA-6gn" kind="presentation" identifier="BackgroundVC" modalPresentationStyle="overCurrentContext" id="uT5-t8-h6E"/>
@@ -1056,13 +1056,13 @@ start creating content…</string>
                         <segue destination="8zW-8a-8Zk" kind="presentation" identifier="TemplatesVC" modalPresentationStyle="overCurrentContext" id="bN5-uJ-AnM"/>
                         <segue destination="z31-ar-cnP" kind="presentation" identifier="AccountsVC" modalPresentationStyle="overFullScreen" id="uiI-OV-vWl"/>
                         <segue destination="giY-87-fPi" kind="presentation" identifier="captionsCreationSegue" modalPresentationStyle="overCurrentContext" id="Opb-MM-el2"/>
-                        <segue destination="lv1-k7-unQ" kind="custom" identifier="captionsUnavailableSegue" customClass="CaptionsUnavailableSegue" customModule="Slate" customModuleProvider="target" id="49e-2G-qpL"/>
+                        <segue destination="lv1-k7-unQ" kind="custom" identifier="captionsUnavailableSegue" customClass="CaptionsUnavailableSegue" customModule="slateReactNative" customModuleProvider="target" id="49e-2G-qpL"/>
                         <segue destination="jIi-Bt-u4T" kind="presentation" identifier="customAudioVC" modalPresentationStyle="overCurrentContext" id="Z8Q-9T-ubl"/>
                         <segue destination="rs7-oP-eA5" kind="presentation" identifier="customAudioVolumeListVC" modalPresentationStyle="overCurrentContext" id="yZ0-rK-4C6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iWG-vf-hbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="9vN-qm-cZv" customClass="MediaLoadingView" customModule="Slate" customModuleProvider="target">
+                <view contentMode="scaleToFill" id="9vN-qm-cZv" customClass="MediaLoadingView" customModule="slateReactNative" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="400" height="490"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -1085,7 +1085,7 @@ start creating content…</string>
                                             <constraint firstAttribute="height" constant="128" id="9HD-X2-1WR"/>
                                         </constraints>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MediaLoadingCell" id="MDU-VU-zrj" customClass="MediaLoadingCell" customModule="Slate" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MediaLoadingCell" id="MDU-VU-zrj" customClass="MediaLoadingCell" customModule="slateReactNative" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="50" width="276" height="61"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MDU-VU-zrj" id="vHa-eG-3m5">
@@ -1242,7 +1242,7 @@ start creating content…</string>
                     </connections>
                 </view>
                 <exit id="b7f-ds-2ny" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer delaysTouchesBegan="YES" delaysTouchesEnded="NO" id="bpa-Zc-BQx" customClass="UITapGestureRecognizerEx" customModule="Slate" customModuleProvider="target">
+                <tapGestureRecognizer delaysTouchesBegan="YES" delaysTouchesEnded="NO" id="bpa-Zc-BQx" customClass="UITapGestureRecognizerEx" customModule="slateReactNative" customModuleProvider="target">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="maxDistance">
                             <real key="value" value="4"/>
@@ -1293,8 +1293,8 @@ start creating content…</string>
         <!--Layout HostVC-->
         <scene sceneID="dsG-Hx-bjM">
             <objects>
-                <viewController storyboardIdentifier="LayoutHostVC" id="P86-RM-bcU" customClass="LayoutHostVC" customModule="Slate" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="q8y-0x-Mj8" customClass="LayoutHostVCView" customModule="Slate" customModuleProvider="target">
+                <viewController storyboardIdentifier="LayoutHostVC" id="P86-RM-bcU" customClass="LayoutHostVC" customModule="slateReactNative" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q8y-0x-Mj8" customClass="LayoutHostVCView" customModule="slateReactNative" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="mmg-4g-Nbz"/>
@@ -1308,8 +1308,8 @@ start creating content…</string>
         <!--DimensionVC-->
         <scene sceneID="919-Al-i8b">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="DId-kJ-9ig" userLabel="DimensionVC" customClass="DimensionVC" customModule="Slate" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zQI-v7-ViD" customClass="DimensionVCView" customModule="Slate" customModuleProvider="target">
+                <viewController modalPresentationStyle="overCurrentContext" id="DId-kJ-9ig" userLabel="DimensionVC" customClass="DimensionVC" customModule="slateReactNative" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zQI-v7-ViD" customClass="DimensionVCView" customModule="slateReactNative" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="190" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1325,13 +1325,13 @@ start creating content…</string>
                                 </constraints>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z2Q-wR-Mbw" customClass="UITableViewEx" customModule="Slate" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z2Q-wR-Mbw" customClass="UITableViewEx" customModule="slateReactNative" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="190" height="118"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="0.12" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DimensionVCCell" id="39T-81-Ddn" customClass="DimensionVCCell" customModule="Slate" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DimensionVCCell" id="39T-81-Ddn" customClass="DimensionVCCell" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="190" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="39T-81-Ddn" id="zov-fa-LQc">
@@ -1406,7 +1406,7 @@ start creating content…</string>
         <!--Logout ConfirmationVC-->
         <scene sceneID="Rwb-dM-kkK">
             <objects>
-                <viewController storyboardIdentifier="LogoutConfirmationVC" id="h8N-7p-uua" customClass="LogoutConfirmationVC" customModule="Slate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogoutConfirmationVC" id="h8N-7p-uua" customClass="LogoutConfirmationVC" customModule="slateReactNative" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xae-M5-oNK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1506,7 +1506,7 @@ start creating content…</string>
         <!--Media PopoverVC-->
         <scene sceneID="upj-yc-y5k">
             <objects>
-                <viewController storyboardIdentifier="MediaPopoverVC" id="1VF-Ky-csm" customClass="MediaPopoverVC" customModule="Slate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MediaPopoverVC" id="1VF-Ky-csm" customClass="MediaPopoverVC" customModule="slateReactNative" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Ye-TL-14r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1523,7 +1523,7 @@ start creating content…</string>
                                             <color key="separatorColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <prototypes>
-                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MediaPopoverVCCell" id="3Vh-05-Vt0" customClass="MediaPopoverVCCell" customModule="Slate" customModuleProvider="target">
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MediaPopoverVCCell" id="3Vh-05-Vt0" customClass="MediaPopoverVCCell" customModule="slateReactNative" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="50" width="414" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Vh-05-Vt0" id="668-rO-q1O">
@@ -1682,7 +1682,7 @@ start creating content…</string>
         <!--Options MenuVC-->
         <scene sceneID="Qlx-hX-Fen">
             <objects>
-                <viewController storyboardIdentifier="OptionsMenuVC" id="eNQ-LH-8tR" customClass="OptionsMenuVC" customModule="Slate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OptionsMenuVC" id="eNQ-LH-8tR" customClass="OptionsMenuVC" customModule="slateReactNative" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s3K-vX-95k">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1728,7 +1728,7 @@ start creating content…</string>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuCell" id="skM-fh-i28" customClass="OptionsMenuCell" customModule="Slate" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuCell" id="skM-fh-i28" customClass="OptionsMenuCell" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="skM-fh-i28" id="Ugo-oK-jL9">
@@ -1763,7 +1763,7 @@ start creating content…</string>
                                             <outlet property="labelTitle" destination="GE9-YV-Nsi" id="r0Z-Al-0tR"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuSafezoneSwitchCell" rowHeight="82" id="JZD-hg-FXS" customClass="OptionsMenuSafezoneSwitchCell" customModule="Slate" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuSafezoneSwitchCell" rowHeight="82" id="JZD-hg-FXS" customClass="OptionsMenuSafezoneSwitchCell" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="93.5" width="320" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JZD-hg-FXS" id="9El-sq-UlD">
@@ -1817,7 +1817,7 @@ start creating content…</string>
                                             <outlet property="switchSafezone" destination="Z3e-Ds-j6U" id="vOB-DD-pAe"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuSafeZoneCell" id="rwo-vS-h5c" customClass="OptionsMenuSafeZoneCell" customModule="Slate" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuSafeZoneCell" id="rwo-vS-h5c" customClass="OptionsMenuSafeZoneCell" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="175.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rwo-vS-h5c" id="E7x-Cu-gSE">
@@ -1861,7 +1861,7 @@ start creating content…</string>
                                             <outlet property="selectionImageView" destination="yWs-UB-BBN" id="5oR-iY-BuP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuSafeZoneAdditionCell" id="dFz-wY-GR7" customClass="OptionsMenuSafeZoneAdditionCell" customModule="Slate" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuSafeZoneAdditionCell" id="dFz-wY-GR7" customClass="OptionsMenuSafeZoneAdditionCell" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="219" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dFz-wY-GR7" id="b5j-Ka-9Rg">
@@ -1897,7 +1897,7 @@ start creating content…</string>
                                             <outlet property="additionTitleLabel" destination="oH1-9Q-sEO" id="oin-JW-MmI"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuAccountCell" rowHeight="100" id="wA8-9J-Z7i" customClass="OptionsMenuAccountCell" customModule="Slate" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuAccountCell" rowHeight="100" id="wA8-9J-Z7i" customClass="OptionsMenuAccountCell" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="262.5" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wA8-9J-Z7i" id="QEq-VL-78F">
@@ -1941,7 +1941,7 @@ start creating content…</string>
                                             <outlet property="labelTitle" destination="8hQ-fr-vBv" id="K6s-3M-WsE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuLogoutCell" id="bSa-P1-v1q" customClass="OptionsMenuLogoutCell" customModule="Slate" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OptionsMenuLogoutCell" id="bSa-P1-v1q" customClass="OptionsMenuLogoutCell" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="362.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bSa-P1-v1q" id="OdG-vm-3FQ">
@@ -2024,7 +2024,7 @@ start creating content…</string>
         <!--AccountsVC-->
         <scene sceneID="TBN-Nu-UJ2">
             <objects>
-                <viewController storyboardIdentifier="AccountsVC" id="z31-ar-cnP" customClass="AccountsVC" customModule="Slate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountsVC" id="z31-ar-cnP" customClass="AccountsVC" customModule="slateReactNative" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2bY-qL-69o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2062,7 +2062,7 @@ start creating content…</string>
                                     </connections>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AccountsCell" id="lK9-E2-vo7" customClass="AccountsCell" customModule="Slate" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AccountsCell" id="lK9-E2-vo7" customClass="AccountsCell" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="94" width="414" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lK9-E2-vo7" id="kUK-od-ZlI">
@@ -2142,7 +2142,7 @@ start creating content…</string>
         <!--Text Options View Controller-->
         <scene sceneID="eCC-WB-prr">
             <objects>
-                <viewController storyboardIdentifier="TextOptionsVC" automaticallyAdjustsScrollViewInsets="NO" id="yVG-N9-RAq" customClass="TextOptionsViewController" customModule="Slate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TextOptionsVC" automaticallyAdjustsScrollViewInsets="NO" id="yVG-N9-RAq" customClass="TextOptionsViewController" customModule="slateReactNative" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="QcG-8Y-qOB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2188,7 +2188,7 @@ start creating content…</string>
                                     <inset key="sectionInset" minX="16" minY="10" maxX="16" maxY="4"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" contentMode="center" reuseIdentifier="TextOptionCollectionViewCell" id="XWc-k6-EHW" customClass="TextOptionCollectionViewCell" customModule="Slate" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" contentMode="center" reuseIdentifier="TextOptionCollectionViewCell" id="XWc-k6-EHW" customClass="TextOptionCollectionViewCell" customModule="slateReactNative" customModuleProvider="target">
                                         <rect key="frame" x="16" y="13" width="56" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">

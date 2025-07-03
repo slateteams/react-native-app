@@ -1,6 +1,11 @@
 import UIKit
 import React
 
+// Import SlateSDK modules if available
+#if canImport(SlateCore)
+import SlateCore
+#endif
+
 @objc(SlateWorkspaceBridge)
 class SlateWorkspaceBridge: NSObject, RCTBridgeModule {
     
@@ -62,13 +67,15 @@ class SlateWorkspaceBridge: NSObject, RCTBridgeModule {
         }
     }
     
+    // MARK: - Content Editor Integration
+    
     @objc func openWorkspace(
         _ draftId: String?,
         resolver resolve: @escaping RCTPromiseResolveBlock,
         rejecter reject: @escaping RCTPromiseRejectBlock
     ) {
         DispatchQueue.main.async {
-            NSLog("Opening workspace with draft ID: \(draftId ?? "new")")
+            NSLog("🎬 Opening workspace with draft ID: \(draftId ?? "new")")
             
             // Get the root view controller
             guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
@@ -76,25 +83,41 @@ class SlateWorkspaceBridge: NSObject, RCTBridgeModule {
                 return
             }
             
-            // Load ContentEditVC from the Main storyboard
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let contentEditVC = storyboard.instantiateViewController(withIdentifier: "ContentEditVC") as? ContentEditVC else {
-                reject("STORYBOARD_ERROR", "Could not load ContentEditVC from storyboard", nil)
-                return
-            }
-            
-            // Set the draft ID if provided
-            if let draftId = draftId {
-                // TODO: Set draft ID on ContentEditVC when the proper API is available
-                NSLog("Setting draft ID: \(draftId)")
-            }
+            // Create ContentEditVC using the updated SPM-compatible approach
+            let contentEditVC = self.createContentEditVC(draftId: draftId)
             
             // Present the view controller
             let navigationController = UINavigationController(rootViewController: contentEditVC)
             navigationController.modalPresentationStyle = .fullScreen
             
             rootViewController.present(navigationController, animated: true) {
-                resolve(["success": true, "message": "Workspace opened successfully"])
+                resolve(["success": true, "message": "Workspace opened successfully", "draftId": draftId ?? "new"])
+            }
+        }
+    }
+    
+    @objc func openContentEditor(
+        _ resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+    ) {
+        DispatchQueue.main.async {
+            NSLog("🎬 Opening content editor for new project...")
+            
+            // Get the root view controller
+            guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
+                reject("NO_ROOT_VC", "No root view controller found", nil)
+                return
+            }
+            
+            // Create ContentEditVC for new project
+            let contentEditVC = self.createContentEditVC(draftId: nil)
+            
+            // Present the view controller
+            let navigationController = UINavigationController(rootViewController: contentEditVC)
+            navigationController.modalPresentationStyle = .fullScreen
+            
+            rootViewController.present(navigationController, animated: true) {
+                resolve(["success": true, "message": "Content editor opened successfully"])
             }
         }
     }
@@ -142,36 +165,71 @@ class SlateWorkspaceBridge: NSObject, RCTBridgeModule {
         }
     }
     
-    @objc func openContentEditor(
-        _ resolve: @escaping RCTPromiseResolveBlock,
-        rejecter reject: @escaping RCTPromiseRejectBlock
-    ) {
-        DispatchQueue.main.async {
-            NSLog("Opening content editor for new project...")
-            
-            // Get the root view controller
-            guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
-                reject("NO_ROOT_VC", "No root view controller found", nil)
-                return
-            }
-            
-            // Load ContentEditVC from the Main storyboard
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let contentEditVC = storyboard.instantiateViewController(withIdentifier: "ContentEditVC") as? ContentEditVC else {
-                reject("STORYBOARD_ERROR", "Could not load ContentEditVC from storyboard", nil)
-                return
-            }
-            
-            // No draft ID means create new project
-            NSLog("Creating new project")
-            
-            // Present the view controller
-            let navigationController = UINavigationController(rootViewController: contentEditVC)
-            navigationController.modalPresentationStyle = .fullScreen
-            
-            rootViewController.present(navigationController, animated: true) {
-                resolve(["success": true, "message": "Content editor opened successfully"])
-            }
+    // MARK: - Private Helper Methods
+    
+    private func createContentEditVC(draftId: String?) -> UIViewController {
+        NSLog("📱 Creating ContentEditVC with SPM integration...")
+        
+        // Strategy 1: Try to use real ContentEditVC from SlateSDK (when fully integrated)
+        #if canImport(SlateCore) 
+        if let slateContentEditVC = createSlateSDKContentEditVC(draftId: draftId) {
+            NSLog("✅ Using real ContentEditVC from SlateSDK")
+            return slateContentEditVC
         }
+        #endif
+        
+        // Strategy 2: Try to load from storyboard (legacy compatibility)
+        if let storyboardVC = createContentEditVCFromStoryboard(draftId: draftId) {
+            NSLog("✅ Using ContentEditVC from storyboard")
+            return storyboardVC
+        }
+        
+        // Strategy 3: Fallback to SimpleContentEditVC (always works)
+        NSLog("⚠️ Using SimpleContentEditVC fallback")
+        return createSimpleContentEditVC(draftId: draftId)
+    }
+    
+    private func createSlateSDKContentEditVC(draftId: String?) -> UIViewController? {
+        // This will be implemented when SlateSDK integration is complete
+        // For now, return nil to fall back to other strategies
+        return nil
+    }
+    
+    private func createContentEditVCFromStoryboard(draftId: String?) -> UIViewController? {
+        do {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let contentEditVC = storyboard.instantiateViewController(withIdentifier: "ContentEditVC")
+            
+            // Try to set draft ID if the VC supports it
+            if let draftId = draftId {
+                // Use reflection to safely set draftId property if it exists
+                if contentEditVC.responds(to: Selector("setDraftId:")) {
+                    contentEditVC.setValue(draftId, forKey: "draftId")
+                }
+            }
+            
+            return contentEditVC
+        } catch {
+            NSLog("❌ Failed to load ContentEditVC from storyboard: \(error)")
+            return nil
+        }
+    }
+    
+    private func createSimpleContentEditVC(draftId: String?) -> UIViewController {
+        let simpleVC = SimpleContentEditVC()
+        simpleVC.draftId = draftId
+        
+        // Set up completion handler
+        simpleVC.setOnComplete { [weak self] resultDraftId in
+            NSLog("✅ SimpleContentEditVC completed with draft: \(resultDraftId ?? "none")")
+            // Post notification for React Native to handle
+            NotificationCenter.default.post(
+                name: Notification.Name("SlateWorkspaceCompleted"),
+                object: nil,
+                userInfo: ["draftId": resultDraftId ?? ""]
+            )
+        }
+        
+        return simpleVC
     }
 } 
